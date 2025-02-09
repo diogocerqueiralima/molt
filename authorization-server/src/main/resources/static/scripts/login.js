@@ -8,6 +8,19 @@ function onLoad() {
         loadErrorAnimation("Não foi possível validar o seu login.")
     }
 
+    const form = document.getElementById("form");
+
+    form.addEventListener("submit", event => {
+
+        const password = document.getElementById("password").value;
+
+        if (password.length < 8) {
+            event.preventDefault()
+            loadErrorAnimation("Não foi possível validar o seu login.")
+        }
+
+    })
+
 }
 
 function loadErrorAnimation(message) {
