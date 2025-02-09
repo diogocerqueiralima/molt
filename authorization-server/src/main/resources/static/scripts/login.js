@@ -5,7 +5,7 @@ function onLoad() {
     const urlParams = new URLSearchParams(window.location.search)
 
     if (urlParams.has("error")) {
-        loadErrorAnimation("As credenciais estão incorretas.")
+        loadErrorAnimation("Não foi possível validar o seu login.")
     }
 
 }
