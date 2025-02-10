@@ -4,6 +4,7 @@ import com.github.trove.authorizationserver.domain.User
 import com.github.trove.authorizationserver.exceptions.PasswordLengthException
 import com.github.trove.authorizationserver.exceptions.PasswordMatchException
 import com.github.trove.authorizationserver.exceptions.UserRegisteredException
+import com.github.trove.authorizationserver.producers.UserProducer
 import com.github.trove.authorizationserver.repositories.UserRepository
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.core.userdetails.UsernameNotFoundException
@@ -14,7 +15,8 @@ import org.springframework.stereotype.Service
 class UserService(
 
     private val userRepository: UserRepository,
-    private val passwordEncoder: PasswordEncoder
+    private val passwordEncoder: PasswordEncoder,
+    private val userProducer: UserProducer
 
 ) : UserDetailsService {
 
@@ -41,7 +43,6 @@ class UserService(
                 password = passwordEncoder.encode(password)
             )
         )
-
     }
 
 }

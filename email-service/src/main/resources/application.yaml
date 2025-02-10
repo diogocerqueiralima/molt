@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: email-service
+  config:
+    import: optional:file:.env[.properties]
+  mail:
+    default-encoding: UTF-8
+    host: ${MAIL_HOST}
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    port: ${MAIL_PORT}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+    protocol: smtp
+    test-connection: false
+  rabbitmq:
+    host: rabbitmq
+    port: 5672
+    username: user
+    password: password
+
+broker:
+  queue:
+    email:
+      name: ${BROKER_QUEUE_EMAIL_NAME}

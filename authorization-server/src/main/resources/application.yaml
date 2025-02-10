@@ -11,9 +11,19 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+  rabbitmq:
+    host: rabbitmq
+    port: 5672
+    username: user
+    password: password
 
 client:
   id: ${CLIENT_ID}
   secret: ${CLIENT_SECRET}
   redirect:
     uri: ${CLIENT_REDIRECT_URI}
+
+broker:
+  queue:
+    email:
+      name: ${BROKER_QUEUE_EMAIL_NAME}
