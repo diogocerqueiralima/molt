@@ -1,38 +1,39 @@
-window.addEventListener("load", onLoad)
+window.addEventListener("load", onLoad);
 
 function onLoad() {
 
-    const urlParams = new URLSearchParams(window.location.search)
+    const urlParams = new URLSearchParams(window.location.search);
 
     if (urlParams.has("error")) {
-        loadErrorAnimation("Não foi possível validar o seu login.")
+        loadAnimation("Login validation failed.");
     }
 
     const form = document.getElementById("form");
 
     form.addEventListener("submit", event => {
 
+        const username = document.getElementById("username").value;
         const password = document.getElementById("password").value;
 
-        if (password.length < 8) {
-            event.preventDefault()
-            loadErrorAnimation("Não foi possível validar o seu login.")
+        if (password.length < 8 || regex.test(password)) {
+            event.preventDefault();
+            loadAnimation("Login validation failed.");
         }
 
-    })
+    });
 
 }
 
-function loadErrorAnimation(message) {
+function loadAnimation(message) {
 
-    const error = document.getElementById("error");
-    const errorMsg = document.getElementById("content")
+    const popup = document.getElementById("popup");
+    const msg = document.getElementById("content");
 
-    errorMsg.textContent = message
-    error.style.animation = "enter 1s forwards"
+    msg.textContent = message;
+    popup.style.animation = "enter 1s forwards";
 
     setTimeout(() => {
-        error.style.animation = "exit 1s forwards"
-    }, 3000)
+        popup.style.animation = "exit 1s forwards";
+    }, 3000);
 
 }

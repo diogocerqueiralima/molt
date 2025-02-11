@@ -18,10 +18,10 @@ spring:
     protocol: smtp
     test-connection: false
   rabbitmq:
-    host: rabbitmq
-    port: 5672
-    username: user
-    password: password
+    host: ${RABBITMQ_HOST}
+    port: ${RABBITMQ_PORT}
+    username: ${RABBITMQ_USERNAME}
+    password: ${RABBITMQ_PASSWORD}
 
 broker:
   queue:

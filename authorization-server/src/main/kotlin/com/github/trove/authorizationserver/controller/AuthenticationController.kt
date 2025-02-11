@@ -1,5 +1,6 @@
 package com.github.trove.authorizationserver.controller
 
+import com.github.trove.authorizationserver.dto.UserForgotPasswordDto
 import com.github.trove.authorizationserver.dto.UserRegisterDto
 import com.github.trove.authorizationserver.services.UserService
 import org.springframework.stereotype.Controller
@@ -21,7 +22,20 @@ class AuthenticationController(
     fun login() = "login"
 
     @GetMapping("/forgot")
-    fun forgot() = "forgot"
+    fun forgot(model: Model): String {
+
+        model.addAttribute("dto", UserForgotPasswordDto())
+
+        return "forgot"
+    }
+
+    @PostMapping("/forgot")
+    fun forgot(@ModelAttribute dto: UserForgotPasswordDto): String {
+
+        userService.requestResetPassword(dto.usernameOrEmail)
+
+        return "redirect:/auth/forgot?success"
+    }
 
     @GetMapping("/register")
     fun register(model: Model): String {

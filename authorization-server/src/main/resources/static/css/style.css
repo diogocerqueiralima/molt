@@ -7,6 +7,7 @@
     --primary: #EEEEEE;
     --secondary: #76ABAE;
     --error: #a83232;
+    --success: #12a345;
 
 }
 
@@ -37,7 +38,7 @@ html, body {
 
 }
 
-#error {
+#popup {
 
     display: flex;
     flex-direction: row;

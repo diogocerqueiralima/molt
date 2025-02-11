@@ -16,7 +16,7 @@ class RabbitMQConfig(
 ) {
 
     @Bean
-    fun queue(): Queue = Queue(queue, true)
+    fun queue() = Queue(queue, true)
 
     @Bean
     fun messageConverter(): Jackson2JsonMessageConverter {

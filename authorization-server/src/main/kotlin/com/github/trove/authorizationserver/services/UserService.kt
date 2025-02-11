@@ -3,6 +3,7 @@ package com.github.trove.authorizationserver.services
 import com.github.trove.authorizationserver.domain.User
 import com.github.trove.authorizationserver.exceptions.PasswordLengthException
 import com.github.trove.authorizationserver.exceptions.PasswordMatchException
+import com.github.trove.authorizationserver.exceptions.UserNotFoundException
 import com.github.trove.authorizationserver.exceptions.UserRegisteredException
 import com.github.trove.authorizationserver.producers.UserProducer
 import com.github.trove.authorizationserver.repositories.UserRepository
@@ -10,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
+import java.util.*
 
 @Service
 class UserService(
@@ -43,6 +45,15 @@ class UserService(
                 password = passwordEncoder.encode(password)
             )
         )
+    }
+
+    fun requestResetPassword(username: String) {
+
+        val user = userRepository.findByUsernameOrEmail(username, username) ?: throw UserNotFoundException()
+
+        userRepository.save(user.copy(token = UUID.randomUUID()))
+
+        userProducer.publishEmail(user)
     }
 
 }

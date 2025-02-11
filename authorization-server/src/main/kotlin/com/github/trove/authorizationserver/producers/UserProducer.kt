@@ -27,7 +27,7 @@ class UserProducer(
                 template = "RESET_PASSWORD_TEMPLATE",
                 variables = mapOf(
                     "username" to user.username,
-                    "url" to "http://localhost:8080"
+                    "url" to "http://localhost:8080/auth/reset?token=${user.token.toString()}"
                 )
             )
         )

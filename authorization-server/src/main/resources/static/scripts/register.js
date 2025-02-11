@@ -1,24 +1,24 @@
-window.addEventListener("load", onLoad)
+window.addEventListener("load", onLoad);
 
 function onLoad() {
 
-    const urlParams = new URLSearchParams(window.location.search)
-    const errorParam = urlParams.get("error")
+    const urlParams = new URLSearchParams(window.location.search);
+    const errorParam = urlParams.get("error");
 
     if (errorParam) {
 
         switch (errorParam) {
             case "USER_REGISTERED":
-                loadErrorAnimation("Este utilizador já existe.")
-                break
+                loadAnimation("This user already exists.");
+                break;
             case "PASSWORD_LENGTH":
-                loadErrorAnimation("A palavra-passe é muito curta.")
-                break
+                loadAnimation("The password is too short.");
+                break;
             case "PASSWORD_MATCH":
-                loadErrorAnimation("As palavras-passe não coincidem.")
-                break
+                loadAnimation("Passwords does not match.");
+                break;
             default:
-                loadErrorAnimation("Ocorreu um erro inesperado.")
+                loadAnimation("An unexpected error occurred.");
         }
 
     }
@@ -27,34 +27,35 @@ function onLoad() {
 
     form.addEventListener("submit", event => {
 
+        const username = document.getElementById("username").value;
         const password = document.getElementById("password").value;
         const confirmPassword = document.getElementById("confirmPassword").value;
 
         if (password.length < 8) {
-            event.preventDefault()
-            loadErrorAnimation("A palavra-passe é muito curta.")
-            return
+            event.preventDefault();
+            loadAnimation("The password is too short.");
+            return;
         }
 
         if (password !== confirmPassword) {
-            event.preventDefault()
-            loadErrorAnimation("As palavras-passe não coincidem.")
+            event.preventDefault();
+            loadAnimation("Passwords does not match.");
         }
 
-    })
+    });
 
 }
 
-function loadErrorAnimation(message) {
+function loadAnimation(message) {
 
-    const error = document.getElementById("error");
-    const errorMsg = document.getElementById("content")
+    const popup = document.getElementById("popup");
+    const msg = document.getElementById("content");
 
-    errorMsg.textContent = message
-    error.style.animation = "enter 1s forwards"
+    msg.textContent = message;
+    popup.style.animation = "enter 1s forwards";
 
     setTimeout(() => {
-        error.style.animation = "exit 1s forwards"
-    }, 3000)
+        popup.style.animation = "exit 1s forwards";
+    }, 3000);
 
 }
