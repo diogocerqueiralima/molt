@@ -40,6 +40,13 @@ services:
       - network
     env_file:
       - .env
+  products-service:
+    container_name: products-service
+    image: products-service
+    networks:
+      - network
+    env_file:
+      - .env
 
 networks:
   network:
