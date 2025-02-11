@@ -1,7 +1,7 @@
 package com.github.trove.authorizationserver.services
 
 import com.github.trove.authorizationserver.domain.User
-import com.github.trove.authorizationserver.exceptions.PasswordLengthException
+import com.github.trove.authorizationserver.exceptions.RegisterPasswordLengthException
 import com.github.trove.authorizationserver.exceptions.PasswordMatchException
 import com.github.trove.authorizationserver.exceptions.UserNotFoundException
 import com.github.trove.authorizationserver.exceptions.UserRegisteredException
@@ -28,7 +28,7 @@ class UserService(
     fun register(username: String, email: String, password: String, confirmPassword: String): User {
 
         if (password.length < 8)
-            throw PasswordLengthException()
+            throw RegisterPasswordLengthException()
 
         if (password != confirmPassword)
             throw PasswordMatchException()
@@ -49,11 +49,21 @@ class UserService(
 
     fun requestResetPassword(username: String) {
 
-        val user = userRepository.findByUsernameOrEmail(username, username) ?: throw UserNotFoundException()
+        val user = userRepository.findByUsernameOrEmail(username, username) ?: throw UserNotFoundException("forgot")
 
         userRepository.save(user.copy(token = UUID.randomUUID()))
 
         userProducer.publishEmail(user)
+    }
+
+    fun resetPassword(token: UUID, password: String) {
+
+        if (password.length < 8 || password.isBlank())
+            throw RegisterPasswordLengthException()
+
+        val user = userRepository.findByToken(token) ?: throw UserNotFoundException("reset")
+
+        userRepository.save(user.copy(token = null, password = passwordEncoder.encode(password)))
     }
 
 }

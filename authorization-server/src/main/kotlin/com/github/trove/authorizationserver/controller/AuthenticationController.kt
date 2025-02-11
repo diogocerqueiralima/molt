@@ -2,13 +2,12 @@ package com.github.trove.authorizationserver.controller
 
 import com.github.trove.authorizationserver.dto.UserForgotPasswordDto
 import com.github.trove.authorizationserver.dto.UserRegisterDto
+import com.github.trove.authorizationserver.dto.UserResetPasswordDto
 import com.github.trove.authorizationserver.services.UserService
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.ModelAttribute
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.*
+import java.util.UUID
 
 @Controller
 @RequestMapping("/auth")
@@ -37,6 +36,22 @@ class AuthenticationController(
         return "redirect:/auth/forgot?success"
     }
 
+    @GetMapping("/reset")
+    fun reset(@RequestParam token: String, model: Model): String {
+
+        model.addAttribute("dto", UserResetPasswordDto(token))
+
+        return "reset"
+    }
+
+    @PostMapping("/reset")
+    fun reset(@ModelAttribute dto: UserResetPasswordDto): String {
+
+        userService.resetPassword(UUID.fromString(dto.token), dto.password)
+
+        return "redirect:/auth/login"
+    }
+
     @GetMapping("/register")
     fun register(model: Model): String {
 
@@ -50,7 +65,7 @@ class AuthenticationController(
 
         userService.register(user.username, user.email, user.password, user.confirmPassword)
 
-        return "redirect:/login"
+        return "redirect:/auth/login"
     }
 
 }

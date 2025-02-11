@@ -5,7 +5,13 @@ function onLoad() {
     const urlParams = new URLSearchParams(window.location.search);
 
     if (urlParams.has("error")) {
-        loadAnimation("Login validation failed.");
+
+        if (urlParams.get("error") === "PASSWORD_LENGTH") {
+            loadAnimation("The password is too short.")
+            return
+        }
+
+        loadAnimation("This token is not associated with any user account.");
     }
 
     const form = document.getElementById("form");
@@ -16,7 +22,7 @@ function onLoad() {
 
         if (password.length < 8) {
             event.preventDefault();
-            loadAnimation("Login validation failed.");
+            loadAnimation("The password is too short.");
         }
 
     });

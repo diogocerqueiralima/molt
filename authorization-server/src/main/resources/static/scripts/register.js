@@ -27,7 +27,6 @@ function onLoad() {
 
     form.addEventListener("submit", event => {
 
-        const username = document.getElementById("username").value;
         const password = document.getElementById("password").value;
         const confirmPassword = document.getElementById("confirmPassword").value;
 

@@ -1,6 +1,6 @@
 package com.github.trove.authorizationserver.exceptions
 
-class PasswordLengthException(
+class RegisterPasswordLengthException(
 
     override val message: String = "The password length is invalid"
 
