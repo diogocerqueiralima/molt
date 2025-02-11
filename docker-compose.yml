@@ -43,6 +43,8 @@ services:
   products-service:
     container_name: products-service
     image: products-service
+    ports:
+      - "8081:8080"
     networks:
       - network
     env_file:
