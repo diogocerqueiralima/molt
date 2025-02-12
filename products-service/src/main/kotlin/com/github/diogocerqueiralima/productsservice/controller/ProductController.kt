@@ -111,5 +111,6 @@ fun Product.toDto() = ProductDto(
     name = this.name,
     description = this.description,
     price = this.price,
+    releaseDate = this.releaseDate,
     categories = this.categories.map { it.id }
 )

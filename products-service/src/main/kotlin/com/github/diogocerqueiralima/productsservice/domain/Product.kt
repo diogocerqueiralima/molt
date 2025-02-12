@@ -1,6 +1,7 @@
 package com.github.diogocerqueiralima.productsservice.domain
 
 import jakarta.persistence.*
+import java.time.LocalDateTime
 
 @Entity
 @Table(name = "products")
@@ -18,6 +19,9 @@ data class Product(
 
     @Column(nullable = false)
     val price: Double,
+
+    @Column(nullable = false)
+    val releaseDate: LocalDateTime = LocalDateTime.now(),
 
     @ManyToMany
     @JoinTable(

@@ -1,5 +1,8 @@
 package com.github.diogocerqueiralima.productsservice.dto
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class ApiResponseDto<T>(
 
     val message: String,

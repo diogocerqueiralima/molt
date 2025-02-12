@@ -1,5 +1,11 @@
 package com.github.diogocerqueiralima.productsservice.dto
 
+import com.github.diogocerqueiralima.productsservice.serializer.LocalDateTimeSerializer
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+import java.time.LocalDateTime
+
+@Serializable
 data class ProductDto(
 
     val id: Long,
@@ -9,6 +15,10 @@ data class ProductDto(
     val description: String,
 
     val price: Double,
+
+    @SerialName("release_date")
+    @Serializable(with = LocalDateTimeSerializer::class)
+    val releaseDate: LocalDateTime,
 
     val categories: List<Long>
 
