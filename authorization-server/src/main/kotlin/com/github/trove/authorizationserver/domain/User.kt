@@ -2,6 +2,7 @@ package com.github.trove.authorizationserver.domain
 
 import jakarta.persistence.*
 import org.springframework.security.core.GrantedAuthority
+import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 import java.util.UUID
 
@@ -25,12 +26,16 @@ data class User(
     val password: String,
 
     @Column(unique = true)
-    val token: UUID? = null
+    val token: UUID? = null,
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @Enumerated(EnumType.STRING)
+    val roles: List<Role> = listOf(Role.USER)
 
 ) : UserDetails {
     
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> =
-        mutableListOf()
+        roles.map { SimpleGrantedAuthority("ROLE_${it.name}") }.toMutableList()
 
     override fun getPassword() = password
 
