@@ -2,6 +2,7 @@ package com.github.diogocerqueiralima.productsservice.controller
 
 import com.github.diogocerqueiralima.productsservice.dto.ApiResponseDto
 import com.github.diogocerqueiralima.productsservice.exceptions.CategoryNotFoundException
+import com.github.diogocerqueiralima.productsservice.exceptions.PageIndexException
 import com.github.diogocerqueiralima.productsservice.exceptions.ProductNotFoundException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -15,6 +16,16 @@ class ErrorController {
     fun handleNotFound(e: Exception): ResponseEntity<ApiResponseDto<Unit>> =
         ResponseEntity
             .status(HttpStatus.NOT_FOUND)
+            .body(
+                ApiResponseDto(
+                    message = e.message ?: ""
+                )
+            )
+
+    @ExceptionHandler(PageIndexException::class)
+    fun handleBadRequest(e: Exception): ResponseEntity<ApiResponseDto<Unit>> =
+        ResponseEntity
+            .status(HttpStatus.BAD_REQUEST)
             .body(
                 ApiResponseDto(
                     message = e.message ?: ""

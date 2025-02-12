@@ -1,10 +1,7 @@
 package com.github.diogocerqueiralima.productsservice.controller
 
 import com.github.diogocerqueiralima.productsservice.domain.Product
-import com.github.diogocerqueiralima.productsservice.dto.ApiResponseDto
-import com.github.diogocerqueiralima.productsservice.dto.ProductCreateDto
-import com.github.diogocerqueiralima.productsservice.dto.ProductDto
-import com.github.diogocerqueiralima.productsservice.dto.ProductUpdateDto
+import com.github.diogocerqueiralima.productsservice.dto.*
 import com.github.diogocerqueiralima.productsservice.services.ProductService
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
@@ -18,6 +15,26 @@ class ProductController(
     private val productService: ProductService
 
 ) {
+
+    @GetMapping("/page/{number}")
+    fun getPage(@PathVariable number: Int): ResponseEntity<ApiResponseDto<PageDto<ProductDto>>> {
+
+        val page = productService.getPage(number)
+
+        return ResponseEntity
+            .ok(
+                ApiResponseDto(
+                    message = "Page of products retrieved successfully.",
+                    data = PageDto(
+                        totalPages = page.totalPages,
+                        pageSize = page.size,
+                        number = page.number + 1,
+                        content = page.content.map { it.toDto() }
+                    )
+                )
+            )
+
+    }
 
     @GetMapping("/{id}")
     fun getById(@PathVariable id: Long): ResponseEntity<ApiResponseDto<ProductDto>> {

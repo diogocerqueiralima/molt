@@ -1,9 +1,14 @@
 package com.github.diogocerqueiralima.productsservice.services
 
 import com.github.diogocerqueiralima.productsservice.domain.Product
+import com.github.diogocerqueiralima.productsservice.exceptions.PageIndexException
 import com.github.diogocerqueiralima.productsservice.exceptions.ProductNotFoundException
 import com.github.diogocerqueiralima.productsservice.repositories.ProductRepository
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.PageRequest
 import org.springframework.stereotype.Service
+
+const val PAGE_SIZE = 10
 
 @Service
 class ProductService(
@@ -12,6 +17,16 @@ class ProductService(
     private val productRepository: ProductRepository
 
 ) {
+
+    fun getPage(number: Int): Page<Product> {
+
+        if (number <= 0)
+            throw PageIndexException()
+
+        val pageRequest = PageRequest.of(number - 1, PAGE_SIZE)
+
+        return productRepository.findAll(pageRequest)
+    }
 
     fun getById(id: Long): Product =
         productRepository.findById(id).orElseThrow { ProductNotFoundException() }
