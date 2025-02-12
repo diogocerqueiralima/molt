@@ -1,5 +1,6 @@
 package com.github.diogocerqueiralima.productsservice.services
 
+import com.github.diogocerqueiralima.productsservice.domain.Category
 import com.github.diogocerqueiralima.productsservice.domain.Product
 import com.github.diogocerqueiralima.productsservice.exceptions.PageIndexException
 import com.github.diogocerqueiralima.productsservice.exceptions.ProductNotFoundException
@@ -18,14 +19,18 @@ class ProductService(
 
 ) {
 
-    fun getPage(number: Int): Page<Product> {
+    fun getPage(number: Int, categoryId: Long?): Page<Product> {
 
         if (number <= 0)
             throw PageIndexException()
 
         val pageRequest = PageRequest.of(number - 1, PAGE_SIZE)
+        val category = categoryId?.let { categoryService.getById(it) }
 
-        return productRepository.findAll(pageRequest)
+        return if (category == null)
+            productRepository.findAll(pageRequest)
+        else
+            productRepository.findAllByCategoriesContains(category, pageRequest)
     }
 
     fun getById(id: Long): Product =

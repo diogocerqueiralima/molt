@@ -1,5 +1,6 @@
 package com.github.diogocerqueiralima.productsservice.controller
 
+import com.github.diogocerqueiralima.productsservice.domain.Category
 import com.github.diogocerqueiralima.productsservice.domain.Product
 import com.github.diogocerqueiralima.productsservice.dto.*
 import com.github.diogocerqueiralima.productsservice.services.ProductService
@@ -17,9 +18,9 @@ class ProductController(
 ) {
 
     @GetMapping("/page/{number}")
-    fun getPage(@PathVariable number: Int): ResponseEntity<ApiResponseDto<PageDto<ProductDto>>> {
+    fun getPage(@PathVariable number: Int, @RequestParam(required = false) category: Long? = null): ResponseEntity<ApiResponseDto<PageDto<ProductDto>>> {
 
-        val page = productService.getPage(number)
+        val page = productService.getPage(number, category)
 
         return ResponseEntity
             .ok(
