@@ -19,6 +19,9 @@ class SecurityConfig {
             .authorizeHttpRequests { authorize ->
                 authorize
                     .requestMatchers(HttpMethod.GET, "/api/v1/categories/**").permitAll()
+                    .requestMatchers(HttpMethod.POST, "/api/v1/categories").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.PUT, "/api/v1/categories").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.DELETE, "/api/v1/categories/*").hasRole("ADMIN")
                     .anyRequest().authenticated()
             }
             .oauth2ResourceServer {

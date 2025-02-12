@@ -1,17 +1,97 @@
 package com.github.diogocerqueiralima.productsservice.controller
 
+import com.github.diogocerqueiralima.productsservice.domain.Product
+import com.github.diogocerqueiralima.productsservice.dto.ApiResponseDto
+import com.github.diogocerqueiralima.productsservice.dto.ProductCreateDto
+import com.github.diogocerqueiralima.productsservice.dto.ProductDto
+import com.github.diogocerqueiralima.productsservice.dto.ProductUpdateDto
+import com.github.diogocerqueiralima.productsservice.services.ProductService
+import jakarta.validation.Valid
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/api/v1/products")
-class ProductController {
+class ProductController(
 
-    @GetMapping
-    fun getAll(): ResponseEntity<Any> {
-        return ResponseEntity.ok("ok")
+    private val productService: ProductService
+
+) {
+
+    @GetMapping("/{id}")
+    fun getById(@PathVariable id: Long): ResponseEntity<ApiResponseDto<ProductDto>> {
+
+        val product = productService.getById(id)
+
+        return ResponseEntity
+            .ok(
+                ApiResponseDto(
+                    message = "Product retrieved successfully.",
+                    data = product.toDto()
+                )
+            )
+    }
+
+    @PostMapping
+    fun create(@RequestBody @Valid dto: ProductCreateDto): ResponseEntity<ApiResponseDto<ProductDto>> {
+
+        val product = productService.create(
+            name = dto.name,
+            description = dto.description,
+            price = dto.price,
+            categoriesIds = dto.categories
+        )
+
+        return ResponseEntity
+            .status(HttpStatus.CREATED)
+            .body(
+                ApiResponseDto(
+                    message = "Product created successfully.",
+                    data = product.toDto()
+                )
+            )
+    }
+
+    @PutMapping
+    fun update(@RequestBody @Valid dto: ProductUpdateDto): ResponseEntity<ApiResponseDto<ProductDto>> {
+
+        val product = productService.update(
+            id = dto.id,
+            name = dto.name,
+            description = dto.description,
+            price = dto.price,
+            categoriesIds = dto.categories
+        )
+
+        return ResponseEntity
+            .ok(
+                ApiResponseDto(
+                    message = "Product updated successfully.",
+                    data = product.toDto()
+                )
+            )
+    }
+
+    @DeleteMapping("/{id}")
+    fun delete(@PathVariable id: Long): ResponseEntity<ApiResponseDto<Unit>> {
+
+        productService.delete(id)
+
+        return ResponseEntity
+            .ok(
+                ApiResponseDto(
+                    message = "Product deleted successfully."
+                )
+            )
     }
 
 }
+
+fun Product.toDto() = ProductDto(
+    id = this.id,
+    name = this.name,
+    description = this.description,
+    price = this.price,
+    categories = this.categories.map { it.id }
+)

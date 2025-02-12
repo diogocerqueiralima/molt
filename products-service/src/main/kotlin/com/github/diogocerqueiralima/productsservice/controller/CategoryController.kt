@@ -48,13 +48,16 @@ class CategoryController(
     }
 
     @DeleteMapping("/{id}")
-    fun delete(@PathVariable id: Long): ResponseEntity<Unit> {
+    fun delete(@PathVariable id: Long): ResponseEntity<ApiResponseDto<Unit>> {
 
         categoryService.delete(id)
 
         return ResponseEntity
-            .noContent()
-            .build()
+            .ok(
+                ApiResponseDto(
+                    message = "Category deleted successfully.",
+                )
+            )
     }
 
     @PostMapping

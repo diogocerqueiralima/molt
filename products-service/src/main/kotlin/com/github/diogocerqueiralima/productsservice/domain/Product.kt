@@ -10,11 +10,13 @@ data class Product(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0,
 
+    @Column(nullable = false)
     val name: String,
 
     @Column(columnDefinition = "text")
     val description: String,
 
+    @Column(nullable = false)
     val price: Double,
 
     @ManyToMany
