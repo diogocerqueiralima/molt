@@ -1,6 +1,7 @@
 package com.github.diogocerqueiralima.productsservice.domain
 
 import jakarta.persistence.*
+import org.springframework.data.domain.Sort
 import java.time.LocalDateTime
 
 @Entity
@@ -31,4 +32,18 @@ data class Product(
     )
     val categories: List<Category> = emptyList()
 
-)
+) {
+
+    enum class Order(
+        val field: String,
+        val direction: Sort.Direction
+    ) {
+
+        MOST_RECENT("releaseDate", Sort.Direction.DESC),
+        OLDEST("releaseDate", Sort.Direction.ASC),
+        LOWEST_PRICE("price", Sort.Direction.ASC),
+        HIGHEST_PRICE("price", Sort.Direction.DESC),
+
+    }
+
+}

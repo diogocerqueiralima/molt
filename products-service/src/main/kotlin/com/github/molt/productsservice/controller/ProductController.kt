@@ -18,9 +18,13 @@ class ProductController(
 ) {
 
     @GetMapping("/page/{number}")
-    fun getPage(@PathVariable number: Int, @RequestParam(required = false) category: Long? = null): ResponseEntity<ApiResponseDto<PageDto<ProductDto>>> {
+    fun getPage(
+        @PathVariable number: Int,
+        @RequestParam(required = false) category: Long? = null,
+        @RequestParam(required = false) order: Product.Order = Product.Order.MOST_RECENT
+    ): ResponseEntity<ApiResponseDto<PageDto<ProductDto>>> {
 
-        val page = productService.getPage(number, category)
+        val page = productService.getPage(number, order, category)
 
         return ResponseEntity
             .ok(

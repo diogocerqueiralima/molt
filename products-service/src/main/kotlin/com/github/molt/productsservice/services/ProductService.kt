@@ -19,12 +19,13 @@ class ProductService(
 
 ) {
 
-    fun getPage(number: Int, categoryId: Long?): Page<Product> {
+    fun getPage(number: Int, order: Product.Order, categoryId: Long?): Page<Product> {
 
         if (number <= 0)
             throw PageIndexException()
 
         val pageRequest = PageRequest.of(number - 1, PAGE_SIZE)
+            .withSort(order.direction, order.field)
         val category = categoryId?.let { categoryService.getById(it) }
 
         return if (category == null)
