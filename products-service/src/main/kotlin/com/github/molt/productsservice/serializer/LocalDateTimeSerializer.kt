@@ -1,4 +1,4 @@
-package com.github.diogocerqueiralima.productsservice.serializer
+package com.github.molt.productsservice.serializer
 
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer

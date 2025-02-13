@@ -1,4 +1,4 @@
-package com.github.diogocerqueiralima.productsservice
+package com.github.molt.productsservice
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

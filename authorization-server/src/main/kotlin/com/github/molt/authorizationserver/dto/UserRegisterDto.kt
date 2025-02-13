@@ -1,4 +1,4 @@
-package com.github.trove.authorizationserver.dto
+package com.github.molt.authorizationserver.dto
 
 import jakarta.validation.constraints.Email
 import jakarta.validation.constraints.NotBlank

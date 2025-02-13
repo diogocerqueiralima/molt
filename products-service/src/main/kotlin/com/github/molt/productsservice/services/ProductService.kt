@@ -1,10 +1,9 @@
-package com.github.diogocerqueiralima.productsservice.services
+package com.github.molt.productsservice.services
 
-import com.github.diogocerqueiralima.productsservice.domain.Category
-import com.github.diogocerqueiralima.productsservice.domain.Product
-import com.github.diogocerqueiralima.productsservice.exceptions.PageIndexException
-import com.github.diogocerqueiralima.productsservice.exceptions.ProductNotFoundException
-import com.github.diogocerqueiralima.productsservice.repositories.ProductRepository
+import com.github.molt.productsservice.domain.Product
+import com.github.molt.productsservice.exceptions.PageIndexException
+import com.github.molt.productsservice.exceptions.ProductNotFoundException
+import com.github.molt.productsservice.repositories.ProductRepository
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
 import org.springframework.stereotype.Service

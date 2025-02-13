@@ -1,4 +1,4 @@
-package com.github.diogocerqueiralima.productsservice.dto
+package com.github.molt.productsservice.dto
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

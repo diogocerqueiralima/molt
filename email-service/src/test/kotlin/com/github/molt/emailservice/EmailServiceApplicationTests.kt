@@ -1,4 +1,4 @@
-package com.github.diogocerqueiralima.emailservice
+package com.github.molt.emailservice
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest

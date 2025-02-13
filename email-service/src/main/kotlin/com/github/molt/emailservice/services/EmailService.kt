@@ -1,4 +1,4 @@
-package com.github.diogocerqueiralima.emailservice.services
+package com.github.molt.emailservice.services
 
 import org.springframework.mail.javamail.JavaMailSender
 import org.springframework.mail.javamail.MimeMessageHelper

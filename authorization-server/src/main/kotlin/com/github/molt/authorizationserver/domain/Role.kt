@@ -1,4 +1,4 @@
-package com.github.trove.authorizationserver.domain
+package com.github.molt.authorizationserver.domain
 
 enum class Role {
 

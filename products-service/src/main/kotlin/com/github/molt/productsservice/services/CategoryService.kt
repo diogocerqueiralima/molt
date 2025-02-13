@@ -1,8 +1,8 @@
-package com.github.diogocerqueiralima.productsservice.services
+package com.github.molt.productsservice.services
 
-import com.github.diogocerqueiralima.productsservice.domain.Category
-import com.github.diogocerqueiralima.productsservice.exceptions.CategoryNotFoundException
-import com.github.diogocerqueiralima.productsservice.repositories.CategoryRepository
+import com.github.molt.productsservice.domain.Category
+import com.github.molt.productsservice.exceptions.CategoryNotFoundException
+import com.github.molt.productsservice.repositories.CategoryRepository
 import org.springframework.stereotype.Service
 
 @Service

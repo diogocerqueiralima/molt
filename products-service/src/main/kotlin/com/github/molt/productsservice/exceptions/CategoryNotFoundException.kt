@@ -1,4 +1,4 @@
-package com.github.diogocerqueiralima.productsservice.exceptions
+package com.github.molt.productsservice.exceptions
 
 class CategoryNotFoundException(
 

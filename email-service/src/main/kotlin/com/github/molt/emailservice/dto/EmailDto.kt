@@ -1,4 +1,4 @@
-package com.github.diogocerqueiralima.emailservice.dto
+package com.github.molt.emailservice.dto
 
 data class EmailDto(
 

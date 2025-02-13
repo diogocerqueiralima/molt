@@ -1,4 +1,4 @@
-package com.github.diogocerqueiralima.productsservice.dto
+package com.github.molt.productsservice.dto
 
 data class CategoryDto(
 

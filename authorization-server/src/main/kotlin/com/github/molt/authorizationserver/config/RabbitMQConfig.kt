@@ -1,4 +1,4 @@
-package com.github.trove.authorizationserver.config
+package com.github.molt.authorizationserver.config
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter

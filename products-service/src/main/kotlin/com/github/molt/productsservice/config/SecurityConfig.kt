@@ -1,4 +1,4 @@
-package com.github.diogocerqueiralima.productsservice.config
+package com.github.molt.productsservice.config
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

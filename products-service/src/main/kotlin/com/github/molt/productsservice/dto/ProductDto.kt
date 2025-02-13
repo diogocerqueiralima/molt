@@ -1,6 +1,6 @@
-package com.github.diogocerqueiralima.productsservice.dto
+package com.github.molt.productsservice.dto
 
-import com.github.diogocerqueiralima.productsservice.serializer.LocalDateTimeSerializer
+import com.github.molt.productsservice.serializer.LocalDateTimeSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import java.time.LocalDateTime

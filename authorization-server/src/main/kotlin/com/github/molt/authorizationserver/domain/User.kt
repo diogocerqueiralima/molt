@@ -1,4 +1,4 @@
-package com.github.trove.authorizationserver.domain
+package com.github.molt.authorizationserver.domain
 
 import jakarta.persistence.*
 import org.springframework.security.core.GrantedAuthority

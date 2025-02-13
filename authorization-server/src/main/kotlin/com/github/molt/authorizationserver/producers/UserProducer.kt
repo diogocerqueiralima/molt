@@ -1,7 +1,7 @@
-package com.github.trove.authorizationserver.producers
+package com.github.molt.authorizationserver.producers
 
-import com.github.trove.authorizationserver.domain.User
-import com.github.trove.authorizationserver.dto.EmailDto
+import com.github.molt.authorizationserver.domain.User
+import com.github.molt.authorizationserver.dto.EmailDto
 import org.springframework.amqp.rabbit.core.RabbitTemplate
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component

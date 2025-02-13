@@ -1,6 +1,6 @@
-package com.github.diogocerqueiralima.productsservice.repositories
+package com.github.molt.productsservice.repositories
 
-import com.github.diogocerqueiralima.productsservice.domain.Category
+import com.github.molt.productsservice.domain.Category
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 

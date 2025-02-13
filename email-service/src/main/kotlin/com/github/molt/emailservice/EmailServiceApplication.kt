@@ -1,4 +1,4 @@
-package com.github.diogocerqueiralima.emailservice
+package com.github.molt.emailservice
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

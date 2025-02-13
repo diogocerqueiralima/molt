@@ -1,9 +1,9 @@
-package com.github.trove.authorizationserver.controller
+package com.github.molt.authorizationserver.controller
 
-import com.github.trove.authorizationserver.dto.UserForgotPasswordDto
-import com.github.trove.authorizationserver.dto.UserRegisterDto
-import com.github.trove.authorizationserver.dto.UserResetPasswordDto
-import com.github.trove.authorizationserver.services.UserService
+import com.github.molt.authorizationserver.dto.UserForgotPasswordDto
+import com.github.molt.authorizationserver.dto.UserRegisterDto
+import com.github.molt.authorizationserver.dto.UserResetPasswordDto
+import com.github.molt.authorizationserver.services.UserService
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.*

@@ -1,9 +1,9 @@
-package com.github.diogocerqueiralima.productsservice.controller
+package com.github.molt.productsservice.controller
 
-import com.github.diogocerqueiralima.productsservice.dto.ApiResponseDto
-import com.github.diogocerqueiralima.productsservice.exceptions.CategoryNotFoundException
-import com.github.diogocerqueiralima.productsservice.exceptions.PageIndexException
-import com.github.diogocerqueiralima.productsservice.exceptions.ProductNotFoundException
+import com.github.molt.productsservice.dto.ApiResponseDto
+import com.github.molt.productsservice.exceptions.CategoryNotFoundException
+import com.github.molt.productsservice.exceptions.PageIndexException
+import com.github.molt.productsservice.exceptions.ProductNotFoundException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ExceptionHandler

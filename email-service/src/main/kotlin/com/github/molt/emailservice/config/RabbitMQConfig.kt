@@ -1,4 +1,4 @@
-package com.github.diogocerqueiralima.emailservice.config
+package com.github.molt.emailservice.config
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.amqp.core.Queue

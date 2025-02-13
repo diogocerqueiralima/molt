@@ -1,4 +1,4 @@
-package com.github.diogocerqueiralima.productsservice.dto
+package com.github.molt.productsservice.dto
 
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.NotNull

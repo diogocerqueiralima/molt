@@ -1,4 +1,4 @@
-package com.github.trove.authorizationserver.exceptions
+package com.github.molt.authorizationserver.exceptions
 
 class ResetPasswordLengthException(
 

@@ -1,7 +1,7 @@
-package com.github.diogocerqueiralima.emailservice.consumers
+package com.github.molt.emailservice.consumers
 
-import com.github.diogocerqueiralima.emailservice.dto.EmailDto
-import com.github.diogocerqueiralima.emailservice.services.EmailService
+import com.github.molt.emailservice.dto.EmailDto
+import com.github.molt.emailservice.services.EmailService
 import org.springframework.amqp.rabbit.annotation.RabbitListener
 import org.springframework.messaging.handler.annotation.Payload
 import org.springframework.stereotype.Component

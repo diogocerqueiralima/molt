@@ -1,4 +1,4 @@
-package com.github.diogocerqueiralima.productsservice.domain
+package com.github.molt.productsservice.domain
 
 import jakarta.persistence.*
 import org.springframework.data.domain.Sort

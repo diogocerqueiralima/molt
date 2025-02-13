@@ -1,11 +1,11 @@
-package com.github.diogocerqueiralima.productsservice.controller
+package com.github.molt.productsservice.controller
 
-import com.github.diogocerqueiralima.productsservice.domain.Category
-import com.github.diogocerqueiralima.productsservice.dto.ApiResponseDto
-import com.github.diogocerqueiralima.productsservice.dto.CategoryCreateDto
-import com.github.diogocerqueiralima.productsservice.dto.CategoryDto
-import com.github.diogocerqueiralima.productsservice.dto.CategoryUpdateDto
-import com.github.diogocerqueiralima.productsservice.services.CategoryService
+import com.github.molt.productsservice.domain.Category
+import com.github.molt.productsservice.dto.ApiResponseDto
+import com.github.molt.productsservice.dto.CategoryCreateDto
+import com.github.molt.productsservice.dto.CategoryDto
+import com.github.molt.productsservice.dto.CategoryUpdateDto
+import com.github.molt.productsservice.services.CategoryService
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity

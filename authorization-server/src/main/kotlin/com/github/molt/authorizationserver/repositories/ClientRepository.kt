@@ -1,4 +1,4 @@
-package com.github.trove.authorizationserver.repositories
+package com.github.molt.authorizationserver.repositories
 
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean

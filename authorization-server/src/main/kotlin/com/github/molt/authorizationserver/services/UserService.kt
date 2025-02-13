@@ -1,12 +1,12 @@
-package com.github.trove.authorizationserver.services
+package com.github.molt.authorizationserver.services
 
-import com.github.trove.authorizationserver.domain.User
-import com.github.trove.authorizationserver.exceptions.RegisterPasswordLengthException
-import com.github.trove.authorizationserver.exceptions.PasswordMatchException
-import com.github.trove.authorizationserver.exceptions.UserNotFoundException
-import com.github.trove.authorizationserver.exceptions.UserRegisteredException
-import com.github.trove.authorizationserver.producers.UserProducer
-import com.github.trove.authorizationserver.repositories.UserRepository
+import com.github.molt.authorizationserver.domain.User
+import com.github.molt.authorizationserver.exceptions.RegisterPasswordLengthException
+import com.github.molt.authorizationserver.exceptions.PasswordMatchException
+import com.github.molt.authorizationserver.exceptions.UserNotFoundException
+import com.github.molt.authorizationserver.exceptions.UserRegisteredException
+import com.github.molt.authorizationserver.producers.UserProducer
+import com.github.molt.authorizationserver.repositories.UserRepository
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.security.crypto.password.PasswordEncoder

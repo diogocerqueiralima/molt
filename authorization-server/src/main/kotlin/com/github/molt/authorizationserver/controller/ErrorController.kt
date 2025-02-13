@@ -1,9 +1,9 @@
-package com.github.trove.authorizationserver.controller
+package com.github.molt.authorizationserver.controller
 
-import com.github.trove.authorizationserver.exceptions.Code
-import com.github.trove.authorizationserver.exceptions.RegisterException
-import com.github.trove.authorizationserver.exceptions.ResetPasswordLengthException
-import com.github.trove.authorizationserver.exceptions.UserNotFoundException
+import com.github.molt.authorizationserver.exceptions.Code
+import com.github.molt.authorizationserver.exceptions.RegisterException
+import com.github.molt.authorizationserver.exceptions.ResetPasswordLengthException
+import com.github.molt.authorizationserver.exceptions.UserNotFoundException
 import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
 

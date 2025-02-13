@@ -1,4 +1,4 @@
-package com.github.trove.authorizationserver.dto
+package com.github.molt.authorizationserver.dto
 
 data class EmailDto(
 

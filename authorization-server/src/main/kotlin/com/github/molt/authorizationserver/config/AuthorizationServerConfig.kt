@@ -1,4 +1,4 @@
-package com.github.trove.authorizationserver.config
+package com.github.molt.authorizationserver.config
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

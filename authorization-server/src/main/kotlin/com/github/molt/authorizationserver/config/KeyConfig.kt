@@ -1,4 +1,4 @@
-package com.github.trove.authorizationserver.config
+package com.github.molt.authorizationserver.config
 
 import com.nimbusds.jose.jwk.JWKSet
 import com.nimbusds.jose.jwk.RSAKey

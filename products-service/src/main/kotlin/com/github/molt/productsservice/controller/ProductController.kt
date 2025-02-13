@@ -1,9 +1,9 @@
-package com.github.diogocerqueiralima.productsservice.controller
+package com.github.molt.productsservice.controller
 
-import com.github.diogocerqueiralima.productsservice.domain.Category
-import com.github.diogocerqueiralima.productsservice.domain.Product
-import com.github.diogocerqueiralima.productsservice.dto.*
-import com.github.diogocerqueiralima.productsservice.services.ProductService
+import com.github.molt.productsservice.domain.Category
+import com.github.molt.productsservice.domain.Product
+import com.github.molt.productsservice.dto.*
+import com.github.molt.productsservice.services.ProductService
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
