@@ -23,7 +23,7 @@ class UserProducer(
             routingKey,
             EmailDto(
                 user.email,
-                subject = "Recuperar palavra-passe",
+                subject = "Reset password",
                 template = "RESET_PASSWORD_TEMPLATE",
                 variables = mapOf(
                     "username" to user.username,

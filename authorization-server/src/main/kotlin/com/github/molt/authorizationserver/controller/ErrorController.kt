@@ -19,7 +19,7 @@ class ErrorController {
         "redirect:/auth/reset?error=${Code.PASSWORD_LENGTH}"
 
     @ExceptionHandler(UserNotFoundException::class)
-    fun handleNotFound(exception: Exception) =
-        "redirect:/auth/login?error"
+    fun handleUserNotFound(exception: UserNotFoundException) =
+        "redirect:/auth/${exception.action}?error"
 
 }
