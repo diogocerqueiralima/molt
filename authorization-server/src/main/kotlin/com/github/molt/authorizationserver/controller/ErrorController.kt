@@ -1,9 +1,8 @@
 package com.github.molt.authorizationserver.controller
 
-import com.github.molt.authorizationserver.exceptions.Code
 import com.github.molt.authorizationserver.exceptions.RegisterException
-import com.github.molt.authorizationserver.exceptions.ResetPasswordLengthException
 import com.github.molt.authorizationserver.exceptions.UserNotFoundException
+import jakarta.servlet.http.HttpServletRequest
 import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
 
@@ -11,15 +10,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler
 class ErrorController {
 
     @ExceptionHandler(RegisterException::class)
-    fun handleBadRequest(exception: RegisterException): String =
-        "redirect:/auth/register?error=${exception.code}"
-
-    @ExceptionHandler(ResetPasswordLengthException::class)
-    fun handle(exception: ResetPasswordLengthException) =
-        "redirect:/auth/reset?error=${Code.PASSWORD_LENGTH}"
+    fun handleRegisterException(e: RegisterException, http: HttpServletRequest): String =
+        "redirect:${http.requestURI}?error=${e.code}"
 
     @ExceptionHandler(UserNotFoundException::class)
-    fun handleUserNotFound(exception: UserNotFoundException) =
-        "redirect:/auth/${exception.action}?error"
+    fun handleNotFound(e: Exception, http: HttpServletRequest): String =
+        "redirect:${http.requestURI}?error"
 
 }

@@ -1,10 +1,7 @@
 package com.github.molt.authorizationserver.services
 
 import com.github.molt.authorizationserver.domain.User
-import com.github.molt.authorizationserver.exceptions.RegisterPasswordLengthException
-import com.github.molt.authorizationserver.exceptions.PasswordMatchException
-import com.github.molt.authorizationserver.exceptions.UserNotFoundException
-import com.github.molt.authorizationserver.exceptions.UserRegisteredException
+import com.github.molt.authorizationserver.exceptions.*
 import com.github.molt.authorizationserver.producers.UserProducer
 import com.github.molt.authorizationserver.repositories.UserRepository
 import org.springframework.security.core.userdetails.UserDetailsService
@@ -12,58 +9,76 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import java.util.*
+import java.util.regex.Pattern
 
 @Service
 class UserService(
 
     private val userRepository: UserRepository,
-    private val passwordEncoder: PasswordEncoder,
-    private val userProducer: UserProducer
+    private val userProducer: UserProducer,
+    private val passwordEncoder: PasswordEncoder
 
 ) : UserDetailsService {
 
     override fun loadUserByUsername(username: String): User =
-        userRepository.findByUsernameOrEmail(username, username) ?: throw UsernameNotFoundException("User not found")
+        userRepository.findByUsernameOrEmail(username, username) ?: throw UsernameNotFoundException("User $username not found")
 
-    fun register(username: String, email: String, password: String, confirmPassword: String): User {
+    fun register(email: String, username: String, password: String, confirmPassword: String): User {
 
-        if (password.length < 8)
-            throw RegisterPasswordLengthException()
+        if (username.isBlank())
+            throw InvalidUsernameException()
+
+        val emailRegex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"
+        val pattern = Pattern.compile(emailRegex)
+
+        if (password.trim().length < 8)
+            throw PasswordLengthException()
 
         if (password != confirmPassword)
             throw PasswordMatchException()
 
+        if (!pattern.matcher(email).matches())
+            throw InvalidEmailException()
+
         val user = userRepository.findByUsernameOrEmail(username, email)
 
         if (user != null)
-            throw UserRegisteredException()
+            throw UserAlreadyExistsException()
 
         return userRepository.save(
             User(
-                username = username,
                 email = email,
+                username = username,
                 password = passwordEncoder.encode(password)
+            )
+        )
+
+    }
+
+    fun forgot(usernameOrEmail: String) {
+
+        val user = userRepository.findByUsernameOrEmail(usernameOrEmail, usernameOrEmail) ?: throw UserNotFoundException()
+
+        userProducer.publishEmail(
+            userRepository.save(
+                user.copy(token = UUID.randomUUID())
             )
         )
     }
 
-    fun requestResetPassword(username: String) {
+    fun reset(token: UUID, password: String) {
 
-        val user = userRepository.findByUsernameOrEmail(username, username) ?: throw UserNotFoundException("forgot")
+        if (password.trim().length < 8)
+            throw PasswordLengthException()
 
-        userRepository.save(user.copy(token = UUID.randomUUID()))
+        val user = userRepository.findByToken(token) ?: throw UserNotFoundException()
 
-        userProducer.publishEmail(user)
-    }
-
-    fun resetPassword(token: UUID, password: String) {
-
-        if (password.length < 8 || password.isBlank())
-            throw RegisterPasswordLengthException()
-
-        val user = userRepository.findByToken(token) ?: throw UserNotFoundException("reset")
-
-        userRepository.save(user.copy(token = null, password = passwordEncoder.encode(password)))
+        userRepository.save(
+            user.copy(
+                token = null,
+                password = passwordEncoder.encode(password)
+            )
+        )
     }
 
 }

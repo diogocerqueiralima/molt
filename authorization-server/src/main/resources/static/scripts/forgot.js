@@ -27,10 +27,12 @@ function loadAnimation(message, isError) {
     }
 
     msg.textContent = message;
-    popup.style.animation = "enter 1s forwards";
+    popup.classList.remove("animate-exit")
+    popup.classList.add("animate-enter")
 
     setTimeout(() => {
-        popup.style.animation = "exit 1s forwards";
+        popup.classList.remove("animate-enter")
+        popup.classList.add("animate-exit")
     }, 3000);
 
 }

@@ -31,7 +31,7 @@ class AuthenticationController(
     @PostMapping("/forgot")
     fun forgot(@ModelAttribute dto: UserForgotPasswordDto): String {
 
-        userService.requestResetPassword(dto.usernameOrEmail)
+        userService.forgot(dto.usernameOrEmail)
 
         return "redirect:/auth/forgot?success"
     }
@@ -47,7 +47,7 @@ class AuthenticationController(
     @PostMapping("/reset")
     fun reset(@ModelAttribute dto: UserResetPasswordDto): String {
 
-        userService.resetPassword(UUID.fromString(dto.token), dto.password)
+        userService.reset(UUID.fromString(dto.token), dto.password)
 
         return "redirect:/auth/login"
     }
@@ -55,7 +55,7 @@ class AuthenticationController(
     @GetMapping("/register")
     fun register(model: Model): String {
 
-        model.addAttribute("user", UserRegisterDto())
+        model.addAttribute("dto", UserRegisterDto())
 
         return "register"
     }
@@ -63,7 +63,7 @@ class AuthenticationController(
     @PostMapping("/register")
     fun register(@ModelAttribute user: UserRegisterDto): String {
 
-        userService.register(user.username, user.email, user.password, user.confirmPassword)
+        userService.register(user.email, user.username, user.password, user.confirmPassword)
 
         return "redirect:/auth/login"
     }

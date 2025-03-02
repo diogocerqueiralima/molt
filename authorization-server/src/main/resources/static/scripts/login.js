@@ -5,18 +5,25 @@ function onLoad() {
     const urlParams = new URLSearchParams(window.location.search);
 
     if (urlParams.has("error")) {
-        loadAnimation("Login validation failed.");
+        loadAnimation("Username or e-mail are incorrect.");
     }
 
     const form = document.getElementById("form");
 
     form.addEventListener("submit", event => {
 
+        const username = document.getElementById("username").value
         const password = document.getElementById("password").value;
 
-        if (password.length < 8) {
+        if (username.trim().length === 0) {
+            event.preventDefault()
+            loadAnimation("Invalid username.")
+            return
+        }
+
+        if (password.trim().length < 8) {
             event.preventDefault();
-            loadAnimation("Login validation failed.");
+            loadAnimation("Username or e-mail are incorrect.");
         }
 
     });
