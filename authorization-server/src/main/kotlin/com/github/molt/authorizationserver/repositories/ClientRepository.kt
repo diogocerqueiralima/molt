@@ -34,7 +34,6 @@ class ClientRepository(
         val oidcClient = RegisteredClient.withId(UUID.randomUUID().toString())
             .clientId(clientId)
             .clientSecret(passwordEncoder.encode(clientSecret))
-            .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_POST)
             .redirectUri(clientRedirectUri)
             .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
             .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)

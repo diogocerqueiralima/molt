@@ -49,6 +49,17 @@ services:
       - network
     env_file:
       - .env
+  gateway:
+    container_name: gateway
+    image: gateway
+    depends_on:
+      - authorization-server
+    ports:
+      - "9090:8080"
+    networks:
+      - network
+    env_file:
+      - .env
 
 networks:
   network:

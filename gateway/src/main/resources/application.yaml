@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: gateway
+  config:
+    import: optional:file:.env[.properties]
+  security:
+    oauth2:
+      client:
+        registration:
+          molt:
+            provider: molt
+            client-id: ${CLIENT_ID}
+            client-secret: ${CLIENT_SECRET}
+            scope: openid
+            redirect-uri: ${CLIENT_REDIRECT_URI}
+            client-name: molt
+        provider:
+          molt:
+            issuer-uri: http://authorization-server:8080
+            authorization-uri: http://localhost:8080/oauth2/authorize
+
+logging:
+  level:
+    org.springframework.cloud.gateway: TRACE
+    org.springframework.security: DEBUG
