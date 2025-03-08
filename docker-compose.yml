@@ -25,6 +25,12 @@ services:
   authorization-server:
     container_name: authorization-server
     image: authorization-server
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
     depends_on:
       - postgres
     ports:
@@ -43,8 +49,6 @@ services:
   products-service:
     container_name: products-service
     image: products-service
-    ports:
-      - "8081:8080"
     networks:
       - network
     env_file:
@@ -53,7 +57,8 @@ services:
     container_name: gateway
     image: gateway
     depends_on:
-      - authorization-server
+      authorization-server:
+        condition: service_healthy
     ports:
       - "9090:8080"
     networks:

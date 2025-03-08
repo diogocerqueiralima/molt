@@ -18,8 +18,3 @@ spring:
           molt:
             issuer-uri: http://authorization-server:8080
             authorization-uri: http://localhost:8080/oauth2/authorize
-
-logging:
-  level:
-    org.springframework.cloud.gateway: TRACE
-    org.springframework.security: DEBUG
