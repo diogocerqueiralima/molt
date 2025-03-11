@@ -7,6 +7,7 @@ import com.nimbusds.jose.jwk.source.JWKSource
 import com.nimbusds.jose.proc.SecurityContext
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.security.oauth2.jwt.JwtDecoder
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configuration.OAuth2AuthorizationServerConfiguration
 import java.security.KeyPair
 import java.security.KeyPairGenerator
@@ -29,7 +30,7 @@ class KeyConfig {
             .build()
         val jwkSet = JWKSet(rsaKey)
 
-        return ImmutableJWKSet<SecurityContext>(jwkSet)
+        return ImmutableJWKSet(jwkSet)
     }
 
     private fun generateRsaKey(): KeyPair {
@@ -41,7 +42,7 @@ class KeyConfig {
     }
 
     @Bean
-    fun jwtDecoder(jwkSource: JWKSource<SecurityContext?>) =
+    fun jwtDecoder(jwkSource: JWKSource<SecurityContext?>): JwtDecoder =
         OAuth2AuthorizationServerConfiguration.jwtDecoder(jwkSource)
 
 }
