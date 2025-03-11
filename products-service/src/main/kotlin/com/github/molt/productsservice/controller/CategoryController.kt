@@ -1,10 +1,6 @@
 package com.github.molt.productsservice.controller
 
-import com.github.molt.productsservice.domain.Category
-import com.github.molt.productsservice.dto.ApiResponseDto
-import com.github.molt.productsservice.dto.CategoryCreateDto
-import com.github.molt.productsservice.dto.CategoryDto
-import com.github.molt.productsservice.dto.CategoryUpdateDto
+import com.github.molt.productsservice.dto.*
 import com.github.molt.productsservice.services.CategoryService
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
@@ -90,9 +86,3 @@ class CategoryController(
     }
 
 }
-
-fun Category.toDto() = CategoryDto(
-    id = this.id,
-    name = this.name,
-    description = this.description
-)

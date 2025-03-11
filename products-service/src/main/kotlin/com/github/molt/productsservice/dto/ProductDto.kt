@@ -1,5 +1,6 @@
 package com.github.molt.productsservice.dto
 
+import com.github.molt.productsservice.domain.Product
 import com.github.molt.productsservice.serializer.LocalDateTimeSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -22,4 +23,13 @@ data class ProductDto(
 
     val categories: List<Long>
 
+)
+
+fun Product.toDto() = ProductDto(
+    id = this.id,
+    name = this.name,
+    description = this.description,
+    price = this.price,
+    releaseDate = this.releaseDate,
+    categories = this.categories.map { it.id }
 )

@@ -30,7 +30,10 @@ data class Product(
         joinColumns = [JoinColumn(name = "product_id")],
         inverseJoinColumns = [JoinColumn(name = "category_id")]
     )
-    val categories: List<Category> = emptyList()
+    val categories: List<Category> = emptyList(),
+
+    @OneToMany(mappedBy = "product")
+    val reviews: List<Review> = emptyList()
 
 ) {
 
