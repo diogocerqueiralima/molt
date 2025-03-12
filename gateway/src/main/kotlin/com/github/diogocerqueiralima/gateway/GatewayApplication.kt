@@ -14,7 +14,7 @@ class GatewayApplication {
         return builder.routes()
             .route("products-service") { r ->
                 r
-                    .path("/api/v1/categories/**", "/api/v1/products/**")
+                    .path("/api/v1/categories/**", "/api/v1/products/**", "/api/v1/reviews/**")
                     .filters { it.tokenRelay() }
                     .uri("http://products-service:8080")
             }
