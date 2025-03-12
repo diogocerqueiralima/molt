@@ -18,6 +18,14 @@ data class UserRegisterDto(
     @Size(min = 8)
     val password: String = "",
 
+    @SerialName("first_name")
+    @NotBlank
+    val firstName: String = "",
+
+    @SerialName("last_name")
+    @NotBlank
+    val lastName: String = "",
+
     @Size(min = 8)
     @SerialName("confirm_password")
     val confirmPassword: String = ""

@@ -23,6 +23,9 @@ function onLoad() {
             case "INVALID_USERNAME":
                 loadAnimation("Username incorrect.");
                 break;
+            case "INVALID_NAME":
+                loadAnimation("Names are incorrect.");
+                break;
             default:
                 loadAnimation("An unexpected error occurred.");
         }
@@ -36,12 +39,20 @@ function onLoad() {
         const email = document.getElementById("email").value
         const username = document.getElementById("username").value
         const password = document.getElementById("password").value;
+        const firstName = document.getElementById("firstName").value
+        const lastName = document.getElementById("lastName").value;
         const confirmPassword = document.getElementById("confirmPassword").value;
         const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
         if (!emailRegex.test(email)) {
             event.preventDefault();
             loadAnimation("Invalid email address.");
+            return;
+        }
+
+        if (firstName.trim().empty() || lastName.trim().empty()) {
+            event.preventDefault()
+            loadAnimation("Names are incorrect.")
             return;
         }
 

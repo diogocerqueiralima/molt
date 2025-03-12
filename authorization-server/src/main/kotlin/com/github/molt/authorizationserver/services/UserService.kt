@@ -23,13 +23,16 @@ class UserService(
     override fun loadUserByUsername(username: String): User =
         userRepository.findByUsernameOrEmail(username, username) ?: throw UsernameNotFoundException("User $username not found")
 
-    fun register(email: String, username: String, password: String, confirmPassword: String): User {
+    fun register(email: String, username: String, firstName: String, lastName: String, password: String, confirmPassword: String): User {
 
         if (username.isBlank())
             throw InvalidUsernameException()
 
         val emailRegex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"
         val pattern = Pattern.compile(emailRegex)
+
+        if (firstName.isBlank() || lastName.isBlank())
+            throw InvalidNameException()
 
         if (password.trim().length < 8)
             throw PasswordLengthException()
@@ -49,7 +52,9 @@ class UserService(
             User(
                 email = email,
                 username = username,
-                password = passwordEncoder.encode(password)
+                password = passwordEncoder.encode(password),
+                firstName = firstName,
+                lastName = lastName,
             )
         )
 

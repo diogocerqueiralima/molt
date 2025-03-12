@@ -13,7 +13,8 @@ open class RegisterException(
         PASSWORD_MATCH,
         INVALID_EMAIL,
         PASSWORD_LENGTH,
-        INVALID_USERNAME
+        INVALID_USERNAME,
+        INVALID_NAME
 
     }
 
@@ -48,3 +49,9 @@ class InvalidUsernameException(
     message: String = "Invalid username"
 
 ) : RegisterException(Code.INVALID_USERNAME, message)
+
+class InvalidNameException(
+
+    message: String = "Invalid name"
+
+) : RegisterException(Code.INVALID_NAME, message)

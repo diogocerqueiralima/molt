@@ -13,6 +13,7 @@ import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint
 import org.springframework.security.web.util.matcher.MediaTypeRequestMatcher
 
+
 @Configuration
 @EnableWebSecurity
 class SecurityConfig {
@@ -26,8 +27,7 @@ class SecurityConfig {
         return http
             .securityMatcher(authorizationServerConfigurer.endpointsMatcher)
             .with(authorizationServerConfigurer) { authorizationServer ->
-                authorizationServer
-                    .oidc(Customizer.withDefaults())
+                authorizationServer.oidc(Customizer.withDefaults())
             }
             .authorizeHttpRequests { authorize ->
                 authorize
