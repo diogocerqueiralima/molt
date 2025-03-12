@@ -21,6 +21,7 @@ class SecurityConfig {
                     .requestMatchers(HttpMethod.GET, "/api/v1/products/**").permitAll()
                     .requestMatchers(HttpMethod.GET, "/api/v1/categories/**").permitAll()
                     .requestMatchers(HttpMethod.POST, "/api/v1/categories").authenticated()
+                    .requestMatchers(HttpMethod.POST, "/api/v1/reviews/**").authenticated()
                     .requestMatchers(HttpMethod.PUT, "/api/v1/categories").authenticated()
                     .requestMatchers(HttpMethod.DELETE, "/api/v1/categories/*").authenticated()
                     .anyRequest().authenticated()

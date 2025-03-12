@@ -14,10 +14,6 @@ data class ReviewCreateDto(
     @field:NotNull
     val productId: Long,
 
-    @SerialName("user_id")
-    @field:NotNull
-    val userId: Long,
-
     @field:Min(0)
     @field:Max(10)
     @field:NotNull
