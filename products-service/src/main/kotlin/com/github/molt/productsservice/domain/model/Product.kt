@@ -20,12 +20,12 @@ data class Product(
         require(name.isNotBlank()) { "Name must not be blank" }
         require(description.isNotBlank()) { "Description must not be blank" }
         require(price >= 0 && price.isFinite()) { "Price must be valid" }
-        require(releaseDate.isEqual(LocalDateTime.now()) || releaseDate.isAfter(LocalDateTime.now())) { "ReleaseDate must be after now" }
     }
 
     fun averageRating() = this.reviews
         .map { it.rating }
         .average()
+        .toInt()
 
     enum class Order(
         val field: String,

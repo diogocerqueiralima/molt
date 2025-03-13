@@ -1,5 +1,6 @@
 package com.github.molt.productsservice.domain.services
 
+import com.github.molt.productsservice.domain.exceptions.ReviewNotFoundException
 import com.github.molt.productsservice.domain.model.Review
 import com.github.molt.productsservice.infrastructure.entities.ReviewEntity
 import com.github.molt.productsservice.infrastructure.repositories.ReviewRepository
@@ -12,6 +13,13 @@ class ReviewService(
     private val productService: ProductService
 
 ) {
+
+    fun getById(id: Long): Review {
+
+        val entity = reviewRepository.findById(id).orElseThrow { ReviewNotFoundException() }
+
+        return entity.toDomain()
+    }
 
     fun create(productId: Long, userId: Long, comment: String, rating: Int): Review {
 
@@ -34,5 +42,5 @@ fun ReviewEntity.toDomain() = Review(
     userId = this.userId,
     comment = this.comment,
     rating = this.rating,
-    userFullName = ""
+    userFullName = "Diogo Lima"
 )

@@ -21,7 +21,12 @@ data class ProductDto(
     @Serializable(with = LocalDateTimeSerializer::class)
     val releaseDate: LocalDateTime,
 
-    val categories: List<Long>
+    val categories: List<Long>,
+
+    val reviews: List<Long>,
+
+    @SerialName("average_rating")
+    val averageRating: Int
 
 )
 
@@ -31,5 +36,7 @@ fun Product.toDto() = ProductDto(
     description = this.description,
     price = this.price,
     releaseDate = this.releaseDate,
-    categories = this.categories.map { it.id }
+    categories = this.categories.map { it.id },
+    reviews = this.reviews.map { it.id },
+    averageRating = this.averageRating()
 )
