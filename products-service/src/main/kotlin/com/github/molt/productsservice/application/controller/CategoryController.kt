@@ -71,10 +71,10 @@ class CategoryController(
             )
     }
 
-    @PutMapping
-    fun update(@RequestBody @Valid dto: CategoryUpdateDto): ResponseEntity<ApiResponseDto<CategoryDto>> {
+    @PutMapping("/{id}")
+    fun update(@PathVariable id: Long, @RequestBody @Valid dto: CategoryUpdateDto): ResponseEntity<ApiResponseDto<CategoryDto>> {
 
-        val category = categoryService.update(dto.id, dto.name, dto.description)
+        val category = categoryService.update(id, dto.name, dto.description)
 
         return ResponseEntity
             .ok(

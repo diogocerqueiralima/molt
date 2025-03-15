@@ -1,10 +1,6 @@
 package com.github.molt.productsservice.application.controller
 
-import com.github.molt.productsservice.application.dto.ApiResponseDto
-import com.github.molt.productsservice.application.dto.ReviewCreateDto
-import com.github.molt.productsservice.application.dto.ReviewDto
-import com.github.molt.productsservice.application.dto.toDto
-import com.github.molt.productsservice.domain.model.Review
+import com.github.molt.productsservice.application.dto.*
 import com.github.molt.productsservice.domain.services.ReviewService
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
@@ -42,7 +38,7 @@ class ReviewController(
         val review = reviewService.create(
             productId = dto.productId,
             comment = dto.comment,
-            rating = dto.score,
+            rating = dto.rating,
             userId = userId
         )
 
@@ -52,6 +48,40 @@ class ReviewController(
                 ApiResponseDto(
                     message = "Review created successfully",
                     data = review.toDto()
+                )
+            )
+    }
+
+    @PutMapping("/{id}")
+    fun update(@PathVariable id: Long, @AuthenticationPrincipal jwt: Jwt, @RequestBody @Valid dto: ReviewUpdateDto): ResponseEntity<ApiResponseDto<ReviewDto>> {
+
+        val userId = jwt.subject.toLong()
+        val review = reviewService.update(
+            id = id,
+            userId = userId,
+            comment = dto.comment,
+            rating = dto.rating
+        )
+
+        return ResponseEntity
+            .ok(
+                ApiResponseDto(
+                    message = "Review updated successfully",
+                    data = review.toDto()
+                )
+            )
+    }
+
+    @DeleteMapping("/{id}")
+    fun delete(@PathVariable id: Long, @AuthenticationPrincipal jwt: Jwt): ResponseEntity<ApiResponseDto<Unit>> {
+
+        val userId = jwt.subject.toLong()
+        reviewService.delete(id, userId)
+
+        return ResponseEntity
+            .ok(
+                ApiResponseDto(
+                    message = "Review deleted successfully"
                 )
             )
     }

@@ -75,11 +75,11 @@ class ProductController(
             )
     }
 
-    @PutMapping
-    fun update(@RequestBody @Valid dto: ProductUpdateDto): ResponseEntity<ApiResponseDto<ProductDto>> {
+    @PutMapping("/{id}")
+    fun update(@PathVariable id: Long, @RequestBody @Valid dto: ProductUpdateDto): ResponseEntity<ApiResponseDto<ProductDto>> {
 
         val product = productService.update(
-            id = dto.id,
+            id = id,
             name = dto.name,
             description = dto.description,
             price = dto.price,

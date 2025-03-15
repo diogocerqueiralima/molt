@@ -17,7 +17,7 @@ data class ReviewCreateDto(
     @field:Min(0)
     @field:Max(10)
     @field:NotNull
-    val score: Int,
+    val rating: Int,
 
     @field:NotBlank
     val comment: String

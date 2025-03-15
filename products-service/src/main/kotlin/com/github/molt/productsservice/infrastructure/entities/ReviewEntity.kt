@@ -12,7 +12,7 @@ data class ReviewEntity(
 
     @ManyToOne
     @JoinColumn(name = "product_id")
-    val product: ProductEntity,
+    val product: ProductEntity? = null,
 
     val comment: String,
 
