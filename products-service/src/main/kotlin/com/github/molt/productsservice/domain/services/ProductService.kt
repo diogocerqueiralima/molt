@@ -4,7 +4,7 @@ import com.github.molt.productsservice.infrastructure.entities.ProductEntity
 import com.github.molt.productsservice.domain.exceptions.PageIndexException
 import com.github.molt.productsservice.domain.exceptions.ProductNotFoundException
 import com.github.molt.productsservice.domain.model.Product
-import com.github.molt.productsservice.infrastructure.repositories.ProductRepository
+import com.github.molt.productsservice.infrastructure.repositories.ProductEntityRepository
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
 import org.springframework.stereotype.Service
@@ -15,7 +15,7 @@ const val PAGE_SIZE = 10
 class ProductService(
 
     private val categoryService: CategoryService,
-    private val productRepository: ProductRepository
+    private val productRepository: ProductEntityRepository
 
 ) {
 

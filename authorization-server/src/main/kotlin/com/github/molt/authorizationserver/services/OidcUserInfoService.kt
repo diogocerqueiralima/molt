@@ -1,18 +1,17 @@
 package com.github.molt.authorizationserver.services
 
 import com.github.molt.authorizationserver.exceptions.UserNotFoundException
-import com.github.molt.authorizationserver.repositories.UserRepository
 import org.springframework.security.oauth2.core.oidc.OidcUserInfo
 import org.springframework.stereotype.Service
 
 @Service
 class OidcUserInfoService(
 
-    private val userRepository: UserRepository
+    //private val userRepository: UserRepository
 
 ) {
 
-    fun loadOidcUserInfo(username: String): OidcUserInfo {
+    /*fun loadOidcUserInfo(username: String): OidcUserInfo {
 
         val user = userRepository.findByUsernameOrEmail(username, username) ?: throw UserNotFoundException()
 
@@ -24,6 +23,6 @@ class OidcUserInfoService(
             .preferredUsername(user.username)
             .email(user.email)
             .build()
-    }
+    }*/
 
 }

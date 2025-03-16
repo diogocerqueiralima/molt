@@ -39,6 +39,13 @@ services:
       - network
     env_file:
       - .env
+  users-service:
+    container_name: users-service
+    image: users-service
+    networks:
+      - network
+    env_file:
+      - .env
   email-service:
     container_name: email-service
     image: email-service

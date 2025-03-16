@@ -63,7 +63,7 @@ class AuthenticationController(
     @PostMapping("/register")
     fun register(@ModelAttribute user: UserRegisterDto): String {
 
-        userService.register(user.email, user.username, user.firstName, user.lastName, user.password, user.confirmPassword)
+        userService.register(user.username, user.email, user.password, user.confirmPassword, user.firstName, user.lastName)
 
         return "redirect:/auth/login"
     }

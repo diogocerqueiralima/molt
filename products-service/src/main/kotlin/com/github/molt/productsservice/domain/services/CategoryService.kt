@@ -3,13 +3,13 @@ package com.github.molt.productsservice.domain.services
 import com.github.molt.productsservice.infrastructure.entities.CategoryEntity
 import com.github.molt.productsservice.domain.exceptions.CategoryNotFoundException
 import com.github.molt.productsservice.domain.model.Category
-import com.github.molt.productsservice.infrastructure.repositories.CategoryRepository
+import com.github.molt.productsservice.infrastructure.repositories.CategoryEntityRepository
 import org.springframework.stereotype.Service
 
 @Service
 class CategoryService(
 
-    private val categoryRepository: CategoryRepository
+    private val categoryRepository: CategoryEntityRepository
 
 ) {
 

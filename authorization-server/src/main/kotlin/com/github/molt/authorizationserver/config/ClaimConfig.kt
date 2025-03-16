@@ -1,10 +1,10 @@
 package com.github.molt.authorizationserver.config
 
-import com.github.molt.authorizationserver.domain.User
 import com.github.molt.authorizationserver.services.OidcUserInfoService
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.core.Authentication
+import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.oauth2.core.oidc.OidcScopes
 import org.springframework.security.oauth2.core.oidc.endpoint.OidcParameterNames
 import org.springframework.security.oauth2.server.authorization.token.JwtEncodingContext
@@ -17,11 +17,11 @@ class ClaimConfig(
 
 ) {
 
-    @Bean
+    /*@Bean
     fun jwtTokenCustomizer() = OAuth2TokenCustomizer<JwtEncodingContext> { ctx ->
 
         val authentication = ctx.getPrincipal<Authentication>()
-        val user = authentication.principal as User
+        val user = authentication.principal as UserDetails
 
         ctx.claims.claims {
             it["sub"] = user.id
@@ -48,6 +48,6 @@ class ClaimConfig(
 
         }
 
-    }
+    }*/
 
 }

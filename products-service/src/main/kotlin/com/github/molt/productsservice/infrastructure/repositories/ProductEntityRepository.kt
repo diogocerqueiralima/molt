@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface ProductRepository : JpaRepository<ProductEntity, Long> {
+interface ProductEntityRepository : JpaRepository<ProductEntity, Long> {
 
     fun findAllByCategoriesContains(category: CategoryEntity, pageable: Pageable): Page<ProductEntity>
 

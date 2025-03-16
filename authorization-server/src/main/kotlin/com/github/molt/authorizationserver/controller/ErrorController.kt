@@ -1,6 +1,7 @@
 package com.github.molt.authorizationserver.controller
 
 import com.github.molt.authorizationserver.exceptions.RegisterException
+import com.github.molt.authorizationserver.exceptions.TokenNotFoundException
 import com.github.molt.authorizationserver.exceptions.UserNotFoundException
 import jakarta.servlet.http.HttpServletRequest
 import org.springframework.web.bind.annotation.ControllerAdvice
@@ -13,7 +14,7 @@ class ErrorController {
     fun handleRegisterException(e: RegisterException, http: HttpServletRequest): String =
         "redirect:${http.requestURI}?error=${e.code}"
 
-    @ExceptionHandler(UserNotFoundException::class)
+    @ExceptionHandler(UserNotFoundException::class, TokenNotFoundException::class)
     fun handleNotFound(e: Exception, http: HttpServletRequest): String =
         "redirect:${http.requestURI}?error"
 

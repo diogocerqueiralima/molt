@@ -1,13 +1,13 @@
 package com.github.molt.authorizationserver.producers
 
-import com.github.molt.authorizationserver.domain.User
+import com.github.molt.authorizationserver.domain.ResetPassword
 import com.github.molt.authorizationserver.dto.EmailDto
 import org.springframework.amqp.rabbit.core.RabbitTemplate
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 
 @Component
-class UserProducer(
+class ResetPasswordProducer(
 
     private val rabbitTemplate: RabbitTemplate,
 
@@ -16,18 +16,18 @@ class UserProducer(
 
 ) {
 
-    fun publishEmail(user: User) {
+    fun publishEmail(resetPassword: ResetPassword, email: String, fullName: String) {
 
         rabbitTemplate.convertAndSend(
             "",
             routingKey,
             EmailDto(
-                user.email,
+                email,
                 subject = "Reset password",
                 template = "RESET_PASSWORD_TEMPLATE",
                 variables = mapOf(
-                    "username" to user.username,
-                    "url" to "http://localhost:8080/auth/reset?token=${user.token.toString()}"
+                    "full_name" to fullName,
+                    "url" to "http://localhost:8080/auth/reset?token=${resetPassword.token}"
                 )
             )
         )

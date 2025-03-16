@@ -20,38 +20,9 @@ open class RegisterException(
 
 }
 
-class PasswordMatchException(
-
-    message: String = "Password does not match"
-
-) : RegisterException(Code.PASSWORD_MATCH, message)
-
-class UserAlreadyExistsException(
-
-    message: String = "User already exists"
-
-) : RegisterException(Code.USER_ALREADY_EXISTS, message)
-
-class InvalidEmailException(
-
-    message: String = "Invalid email"
-
-) : RegisterException(Code.INVALID_EMAIL, message)
-
-class PasswordLengthException(
-
-    message: String = "Invalid password"
-
-) : RegisterException(Code.PASSWORD_LENGTH, message)
-
-class InvalidUsernameException(
-
-    message: String = "Invalid username"
-
-) : RegisterException(Code.INVALID_USERNAME, message)
-
-class InvalidNameException(
-
-    message: String = "Invalid name"
-
-) : RegisterException(Code.INVALID_NAME, message)
+class UsernameException : RegisterException(Code.INVALID_USERNAME, "The username is invalid")
+class UserAlreadyExistsException : RegisterException(Code.USER_ALREADY_EXISTS, "The username already exists")
+class PasswordMatchException : RegisterException(Code.PASSWORD_MATCH, "The password does not match")
+class PasswordLengthException : RegisterException(Code.PASSWORD_LENGTH, "The password length is invalid")
+class NameException : RegisterException(Code.INVALID_NAME, "The name already exists")
+class EmailException : RegisterException(Code.INVALID_EMAIL, "The email is invalid")

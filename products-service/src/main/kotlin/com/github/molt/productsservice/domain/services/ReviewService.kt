@@ -4,13 +4,13 @@ import com.github.molt.productsservice.domain.exceptions.ReviewNotFoundException
 import com.github.molt.productsservice.domain.exceptions.ReviewOwnerException
 import com.github.molt.productsservice.domain.model.Review
 import com.github.molt.productsservice.infrastructure.entities.ReviewEntity
-import com.github.molt.productsservice.infrastructure.repositories.ReviewRepository
+import com.github.molt.productsservice.infrastructure.repositories.ReviewEntityRepository
 import org.springframework.stereotype.Service
 
 @Service
 class ReviewService(
 
-    private val reviewRepository: ReviewRepository,
+    private val reviewRepository: ReviewEntityRepository,
     private val productService: ProductService
 
 ) {
