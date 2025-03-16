@@ -27,6 +27,15 @@ class UserService(
         ).toDomain()
     }
 
+    fun updatePassword(id: Long, password: String): User {
+
+        val entity = userEntityRepository.findById(id).orElseThrow { UserNotFoundException() }
+
+        return userEntityRepository.save(
+            entity.copy(password = password)
+        ).toDomain()
+    }
+
     fun getByUsernameOrEmail(username: String?, email: String?): User {
 
         val entity = userEntityRepository.findUserEntityByUsernameOrEmail(username, email) ?: throw UserNotFoundException()

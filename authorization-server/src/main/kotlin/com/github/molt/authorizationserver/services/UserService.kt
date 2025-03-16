@@ -37,9 +37,9 @@ class UserService(
 
     override fun loadUserByUsername(username: String): UserDetails {
 
-        val responseEntity = restTemplate.getForEntity("$userServiceUri?username=$username", ApiResponseDto::class.java)
+        val responseEntity = restTemplate.getForEntity("$userServiceUri?username=$username", UserApiResponseDto::class.java)
         val apiResponse = responseEntity.body ?: throw RuntimeException("Body is missing")
-        val user = apiResponse.data as UserDto
+        val user = apiResponse.data
 
         return object : UserDetails {
             override fun getAuthorities(): MutableCollection<out GrantedAuthority> =
@@ -95,7 +95,7 @@ class UserService(
         val responseEntity = restTemplate.getForEntity("$userServiceUri?username=$usernameOrEmail&email=$usernameOrEmail", UserApiResponseDto::class.java)
         val apiResponse = responseEntity.body ?: throw RuntimeException("Body is missing")
         val user = apiResponse.data
-        val resetPassword = resetPasswordRepository.save(ResetPassword(userId = user.id))
+        val resetPassword = resetPasswordRepository.findByUserId(user.id) ?: resetPasswordRepository.save(ResetPassword(userId = user.id))
 
         resetPasswordProducer.publishEmail(
             resetPassword,
@@ -113,6 +113,9 @@ class UserService(
         val resetPassword = resetPasswordRepository.findByToken(token) ?: throw TokenNotFoundException()
 
         resetPasswordRepository.delete(resetPassword)
+
+        val httpEntity = HttpEntity(mapOf("password" to passwordEncoder.encode(password)))
+        restTemplate.exchange("$userServiceUri/${resetPassword.userId}", HttpMethod.PUT, httpEntity, ApiResponseDto::class.java)
     }
 
     class UserApiResponseDto(

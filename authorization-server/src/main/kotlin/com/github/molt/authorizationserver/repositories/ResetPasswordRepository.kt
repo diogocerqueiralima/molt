@@ -10,4 +10,6 @@ interface ResetPasswordRepository : JpaRepository<ResetPassword, Long> {
 
     fun findByToken(token: UUID): ResetPassword?
 
+    fun findByUserId(userId: Long): ResetPassword?
+
 }
