@@ -1,10 +1,7 @@
 package com.github.molt.authorizationserver.services
 
 import com.github.molt.authorizationserver.domain.ResetPassword
-import com.github.molt.authorizationserver.dto.ApiResponseDto
-import com.github.molt.authorizationserver.dto.UserCreateDto
-import com.github.molt.authorizationserver.dto.UserDto
-import com.github.molt.authorizationserver.dto.UserRegisterDto
+import com.github.molt.authorizationserver.dto.*
 import com.github.molt.authorizationserver.exceptions.*
 import com.github.molt.authorizationserver.producers.ResetPasswordProducer
 import com.github.molt.authorizationserver.repositories.ResetPasswordRepository
@@ -101,7 +98,7 @@ class UserService(
             resetPassword,
             user.email,
             user.
-            full_name
+            fullName
         )
     }
 
@@ -117,9 +114,5 @@ class UserService(
         val httpEntity = HttpEntity(mapOf("password" to passwordEncoder.encode(password)))
         restTemplate.exchange("$userServiceUri/${resetPassword.userId}", HttpMethod.PUT, httpEntity, ApiResponseDto::class.java)
     }
-
-    class UserApiResponseDto(
-        override val data: UserDto, message: String
-    ) : ApiResponseDto<UserDto>(message)
 
 }

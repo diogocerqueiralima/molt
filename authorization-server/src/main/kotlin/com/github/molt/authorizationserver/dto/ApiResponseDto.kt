@@ -9,3 +9,10 @@ open class ApiResponseDto<T>(
     open val data: T? = null
 
 )
+
+class UserApiResponseDto(
+
+    override val data: UserDto,
+    message: String
+
+) : ApiResponseDto<UserDto>(message)

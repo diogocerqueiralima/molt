@@ -3,9 +3,16 @@ package com.github.molt.productsservice.application.dto
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ApiResponseDto<T>(
+open class ApiResponseDto<T>(
 
     val message: String,
-    val data: T? = null
+    open val data: T? = null
 
 )
+
+class UserApiResponseDto(
+
+    override val data: UserDto,
+    message: String
+
+) : ApiResponseDto<UserDto>(message)

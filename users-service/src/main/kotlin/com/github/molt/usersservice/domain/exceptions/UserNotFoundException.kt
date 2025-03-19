@@ -1,4 +1,4 @@
-package com.github.molt.usersservice.exceptions
+package com.github.molt.usersservice.domain.exceptions
 
 class UserNotFoundException(
 

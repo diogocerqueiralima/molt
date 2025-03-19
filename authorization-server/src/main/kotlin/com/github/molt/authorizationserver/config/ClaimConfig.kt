@@ -17,19 +17,19 @@ class ClaimConfig(
 
 ) {
 
-    /*@Bean
+    @Bean
     fun jwtTokenCustomizer() = OAuth2TokenCustomizer<JwtEncodingContext> { ctx ->
 
         val authentication = ctx.getPrincipal<Authentication>()
-        val user = authentication.principal as UserDetails
+        val userDetails = authentication.principal as UserDetails
+        val oidcUserInfo = oidcUserInfoService.loadOidcUserInfo(userDetails.username)
 
         ctx.claims.claims {
-            it["sub"] = user.id
+            it["sub"] = oidcUserInfo.subject.toLong()
         }
 
         if (ctx.tokenType.value === OidcParameterNames.ID_TOKEN) {
 
-            val oidcUserInfo = oidcUserInfoService.loadOidcUserInfo(user.username)
             val grantedScopes = ctx.authorization?.authorizedScopes ?: emptySet()
 
             ctx.claims.claims {
@@ -48,6 +48,6 @@ class ClaimConfig(
 
         }
 
-    }*/
+    }
 
 }

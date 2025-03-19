@@ -35,7 +35,7 @@ data class Product(
         MOST_RECENT("releaseDate", Sort.Direction.DESC),
         OLDEST("releaseDate", Sort.Direction.ASC),
         LOWEST_PRICE("price", Sort.Direction.ASC),
-        HIGHEST_PRICE("price", Sort.Direction.DESC),
+        HIGHEST_PRICE("price", Sort.Direction.DESC)
 
     }
 

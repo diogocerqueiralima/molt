@@ -1,11 +1,10 @@
 package com.github.molt.usersservice.domain.services
 
+import com.github.molt.usersservice.domain.exceptions.UserNotFoundException
 import com.github.molt.usersservice.domain.model.User
-import com.github.molt.usersservice.exceptions.*
 import com.github.molt.usersservice.infrastructure.entities.UserEntity
 import com.github.molt.usersservice.infrastructure.repositories.UserEntityRepository
 import org.springframework.stereotype.Service
-import java.util.regex.Pattern
 
 @Service
 class UserService(

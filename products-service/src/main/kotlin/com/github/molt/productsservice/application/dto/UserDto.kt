@@ -1,4 +1,4 @@
-package com.github.molt.authorizationserver.dto
+package com.github.molt.productsservice.application.dto
 
 import com.fasterxml.jackson.annotation.JsonProperty
 

@@ -5,35 +5,42 @@ import com.github.molt.productsservice.domain.exceptions.ReviewOwnerException
 import com.github.molt.productsservice.domain.model.Review
 import com.github.molt.productsservice.infrastructure.entities.ReviewEntity
 import com.github.molt.productsservice.infrastructure.repositories.ReviewEntityRepository
+import com.github.molt.productsservice.infrastructure.services.UserService
 import org.springframework.stereotype.Service
+import org.springframework.web.client.RestTemplate
 
 @Service
 class ReviewService(
 
     private val reviewRepository: ReviewEntityRepository,
-    private val productService: ProductService
+    private val productService: ProductService,
+    private val userService: UserService,
+    private val restTemplate: RestTemplate
 
 ) {
+
+
 
     fun getById(id: Long): Review {
 
         val entity = reviewRepository.findById(id).orElseThrow { ReviewNotFoundException() }
 
-        return entity.toDomain()
+        return entity.toDomain(userService.getFullName(entity.userId).fullName)
     }
 
     fun create(productId: Long, userId: Long, comment: String, rating: Int): Review {
 
         val product = productService.getById(productId).toEntity()
-
-        return reviewRepository.save(
+        val entity = reviewRepository.save(
             ReviewEntity(
                 product = product,
                 userId = userId,
                 comment = comment,
                 rating = rating
             )
-        ).toDomain()
+        )
+
+        return entity.toDomain(userService.getFullName(userId).fullName)
     }
 
     fun update(id: Long, userId: Long, comment: String?, rating: Int?): Review {
@@ -43,12 +50,14 @@ class ReviewService(
         if (entity.userId != userId)
             throw ReviewOwnerException()
 
-        return reviewRepository.save(
+        val newEntity = reviewRepository.save(
             entity.copy(
                 comment = comment ?: entity.comment,
                 rating = rating ?: entity.rating
             )
-        ).toDomain()
+        )
+
+        return newEntity.toDomain(userService.getFullName(userId).fullName)
     }
 
     fun delete(id: Long, userId: Long) {
@@ -63,12 +72,12 @@ class ReviewService(
 
 }
 
-fun ReviewEntity.toDomain() = Review(
+fun ReviewEntity.toDomain(userFullName: String) = Review(
     id = this.id,
     userId = this.userId,
     comment = this.comment,
     rating = this.rating,
-    userFullName = "Diogo Lima"
+    userFullName = userFullName
 )
 
 fun Review.toEntity() = ReviewEntity(

@@ -4,7 +4,9 @@ import com.github.molt.productsservice.infrastructure.entities.ProductEntity
 import com.github.molt.productsservice.domain.exceptions.PageIndexException
 import com.github.molt.productsservice.domain.exceptions.ProductNotFoundException
 import com.github.molt.productsservice.domain.model.Product
+import com.github.molt.productsservice.domain.model.Review
 import com.github.molt.productsservice.infrastructure.repositories.ProductEntityRepository
+import com.github.molt.productsservice.infrastructure.services.UserService
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
 import org.springframework.stereotype.Service
@@ -15,7 +17,8 @@ const val PAGE_SIZE = 10
 class ProductService(
 
     private val categoryService: CategoryService,
-    private val productRepository: ProductEntityRepository
+    private val productRepository: ProductEntityRepository,
+    private val userService: UserService
 
 ) {
 
@@ -33,14 +36,15 @@ class ProductService(
                     productRepository.findAll(pageRequest)
                 else
                     productRepository.findAllByCategoriesContains(categoryEntity, pageRequest)
-                ).map { it.toDomain() }
+                ).map { it.toDomain(it.reviews.map { reviewEntity -> reviewEntity.toDomain(userService.getFullName(reviewEntity.userId).fullName) }) }
     }
 
     fun getById(id: Long): Product {
 
         val entity = productRepository.findById(id).orElseThrow { ProductNotFoundException() }
+        val reviews = entity.reviews.map { reviewEntity -> reviewEntity.toDomain(userService.getFullName(reviewEntity.userId).fullName) }
 
-        return entity.toDomain()
+        return entity.toDomain(reviews)
     }
 
     fun create(name: String, description: String, price: Double, categoriesIds: List<Long>): Product {
@@ -54,7 +58,7 @@ class ProductService(
                 price = price,
                 categories = categories
             )
-        ).toDomain()
+        ).toDomain(emptyList())
     }
 
     fun update(id: Long, name: String?, description: String?, price: Double?, categoriesIds: List<Long>?): Product {
@@ -69,7 +73,7 @@ class ProductService(
                 price = price ?: entity.price,
                 categories = categories ?: entity.categories
             )
-        ).toDomain()
+        ).toDomain(entity.reviews.map { reviewEntity -> reviewEntity.toDomain(userService.getFullName(reviewEntity.userId).fullName) })
     }
 
     fun delete(id: Long) {
@@ -90,12 +94,12 @@ fun Product.toEntity() = ProductEntity(
     categories = this.categories.map { it.toEntity() }
 )
 
-fun ProductEntity.toDomain() = Product(
+fun ProductEntity.toDomain(reviews: List<Review>) = Product(
     id = this.id,
     name = this.name,
     description = this.description,
     price = this.price,
     releaseDate = this.releaseDate,
     categories = this.categories.map { it.toDomain() },
-    reviews = this.reviews.map { it.toDomain() }
+    reviews = reviews
 )

@@ -1,7 +1,7 @@
 package com.github.molt.usersservice.application.controller
 
 import com.github.molt.usersservice.application.dto.ApiResponseDto
-import com.github.molt.usersservice.exceptions.UserNotFoundException
+import com.github.molt.usersservice.domain.exceptions.UserNotFoundException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ExceptionHandler
